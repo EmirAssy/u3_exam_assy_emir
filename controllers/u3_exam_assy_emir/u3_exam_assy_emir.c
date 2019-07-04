@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
   int pressed_key;
 
-   int m, n = 0;
+   int w = 0, g = 0;
    int turn_left = 0;
    int turn_right = 0;
    double ds_value1 = 0;
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
    WbDeviceTag encoder_3 = wb_robot_get_device("encoder3");
    wb_position_sensor_enable(encoder_3, TIME_STEP);
 
-  while (wb_robot_step(TIME_STEP) != -1) {
+  void manual(){
 
      pressed_key= wb_keyboard_get_key();
 
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
        wb_motor_set_velocity(wheelB, 6.36);
       }
       else{
-       wb_motor_set_velocity(wheelR, 6.36);
+       wb_motor_set_velocity(wheelR, 0);
        wb_motor_set_velocity(wheelL, 0);
        wb_motor_set_velocity(wheelB, 0);
        turn_left = 0;
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
         wb_motor_set_velocity(wheelB, -6.36);
       }
       else{
-        wb_motor_set_velocity(wheelR, 6.36);
+        wb_motor_set_velocity(wheelR, 0);
         wb_motor_set_velocity(wheelL, 0);
         wb_motor_set_velocity(wheelB, 0);
         turn_right = 0;
@@ -127,7 +127,60 @@ int main(int argc, char **argv)
         wb_motor_set_velocity(wheelL, 0);
         wb_motor_set_velocity(wheelB, 0);
      }
-  };
-  wb_robot_cleanup();
-  return 0;
+    } 
+
+   void automatico(){
+
+     ds_value1 = wb_distance_sensor_get_value (dist_sensor1);
+     printf("Distance sensor1: %lf\n", ds_value1);
+     ds_value2 = wb_distance_sensor_get_value (dist_sensor2);
+     printf("Distance sensor2: %lf\n", ds_value2);
+
+     encoderval1 = wb_position_sensor_get_value(encoder_1);
+     encoderval2 = wb_position_sensor_get_value(encoder_2);
+     encoderval3 = wb_position_sensor_get_value(encoder_3);
+
+     wb_motor_set_velocity(wheelR, -6.36);
+     wb_motor_set_velocity(wheelL, 6.36);
+     wb_motor_set_velocity(wheelB, 0);
+
+    if(ds_value1 < ds_value2 && ds_value1 < 200){
+     wb_motor_set_velocity(wheelR, 0);
+     wb_motor_set_velocity(wheelL, 6.36);
+     wb_motor_set_velocity(wheelB, -6.36);
+    }
+    else if(ds_value1 > ds_value2 && ds_value2 < 200){
+     wb_motor_set_velocity(wheelR, 0);
+     wb_motor_set_velocity(wheelL, -6.36);
+     wb_motor_set_velocity(wheelB, 6.36);
+     }
+    }
+
+   wb_motor_set_velocity(wheelR, 0);
+   wb_motor_set_velocity(wheelL, 0);
+   wb_motor_set_velocity(wheelB, 0);
+
+  while (wb_robot_step(TIME_STEP) != -1) {
+
+   pressed_key = wb_keyboard_get_key();
+
+   if(pressed_key == 'W'){
+    w = 1;
+    g = 0;
+   }
+   else if (pressed_key == 'G'){
+    g = 1;
+    w = 0;
+   }
+   printf("w: %i\n" , w);
+   printf("g: %i\n" , g);
+
+   if(w == 1)
+   manual();
+
+   if(g == 1)
+   automatico();
+   };
+   wb_robot_cleanup();
+   return 0;
 }
