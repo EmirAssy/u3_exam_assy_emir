@@ -140,40 +140,40 @@ int main(int argc, char **argv)
      encoderval2 = wb_position_sensor_get_value(encoder_2);
      encoderval3 = wb_position_sensor_get_value(encoder_3);
 
-     wb_motor_set_velocity(wheelR, -6.36);
-     wb_motor_set_velocity(wheelL, 6.36);
+     wb_motor_set_velocity(wheelR, -6.66);
+     wb_motor_set_velocity(wheelL, 6.66);
      wb_motor_set_velocity(wheelB, 0);
 
     if(ds_value1 < ds_value2 && ds_value1 < 200){
      wb_motor_set_velocity(wheelR, 0);
-     wb_motor_set_velocity(wheelL, 6.36);
-     wb_motor_set_velocity(wheelB, -6.36);
+     wb_motor_set_velocity(wheelL, 6.66);
+     wb_motor_set_velocity(wheelB, -6.66);
     }
     else if(ds_value1 > ds_value2 && ds_value2 < 200){
      wb_motor_set_velocity(wheelR, 0);
-     wb_motor_set_velocity(wheelL, -6.36);
-     wb_motor_set_velocity(wheelB, 6.36);
+     wb_motor_set_velocity(wheelL, -6.66);
+     wb_motor_set_velocity(wheelB, 6.66);
      }
     }
 
-   wb_motor_set_velocity(wheelR, 0);
-   wb_motor_set_velocity(wheelL, 0);
-   wb_motor_set_velocity(wheelB, 0);
+    wb_motor_set_velocity(wheelR, 0);
+    wb_motor_set_velocity(wheelL, 0);
+    wb_motor_set_velocity(wheelB, 0);
 
   while (wb_robot_step(TIME_STEP) != -1) {
 
    pressed_key = wb_keyboard_get_key();
 
-   if(pressed_key == 'W'){
-    w = 1;
-    g = 0;
-   }
-   else if (pressed_key == 'G'){
-    g = 1;
-    w = 0;
-   }
-   printf("w: %i\n" , w);
-   printf("g: %i\n" , g);
+    if(pressed_key == 'W'){
+     w = 1;
+     g = 0;
+    }
+    else if (pressed_key == 'G'){
+     g = 1;
+     w = 0;
+    }
+    printf("w: %i\n" , w);
+    printf("g: %i\n" , g);
 
    if(w == 1)
    manual();
