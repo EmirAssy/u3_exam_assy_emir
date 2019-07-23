@@ -51,7 +51,7 @@ int main(int argc, char **argv)
    wb_position_sensor_enable(encoder_3, TIME_STEP);
 
    void manual(){
-
+     
      pressed_key= wb_keyboard_get_key();
 
      ds_value1 = wb_distance_sensor_get_value (dist_sensor1);
@@ -88,11 +88,11 @@ int main(int argc, char **argv)
        wb_motor_set_velocity (wheelL, -6.36);
        wb_motor_set_velocity (wheelB, 6.36);
      }
-     else if(pressed_key == 'S' ){
+     else if (pressed_key == 'S' ){
       Comparador = encoderval2 + 0.785398;
       turn_left = 1;
      }
-     else if(turn_left == 1){
+     else if (turn_left == 1){
       if(encoderval2 <= Comparador){
        wb_motor_set_velocity(wheelR, 6.36);
        wb_motor_set_velocity(wheelL, 6.36);
@@ -105,11 +105,11 @@ int main(int argc, char **argv)
        turn_left = 0;
       }
      }
-     else if(pressed_key == 'A' ){
+     else if (pressed_key == 'A' ){
        Comparador = encoderval2 - 0.785398;
        turn_right = 1;
      }
-     else if(turn_right == 1){
+     else if (turn_right == 1){
       if(encoderval2 >= Comparador){
         wb_motor_set_velocity(wheelR, -6.36);
         wb_motor_set_velocity(wheelL, -6.36);
@@ -144,12 +144,12 @@ int main(int argc, char **argv)
      wb_motor_set_velocity(wheelL, 6.66);
      wb_motor_set_velocity(wheelB, 0);
 
-    if(ds_value1 < ds_value2 && ds_value1 < 200){
+    if (ds_value1 < ds_value2 && ds_value1 < 200){
      wb_motor_set_velocity(wheelR, 0);
      wb_motor_set_velocity(wheelL, 6.66);
      wb_motor_set_velocity(wheelB, -6.66);
     }
-    else if(ds_value1 > ds_value2 && ds_value2 < 200){
+    else if (ds_value1 > ds_value2 && ds_value2 < 200){
      wb_motor_set_velocity(wheelR, 0);
      wb_motor_set_velocity(wheelL, -6.66);
      wb_motor_set_velocity(wheelB, 6.66);
@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 
    pressed_key = wb_keyboard_get_key();
 
-    if(pressed_key == 'W'){
+    if (pressed_key == 'W'){
      w = 1;
      g = 0;
     }
@@ -175,10 +175,10 @@ int main(int argc, char **argv)
     printf("w: %i\n" , w);
     printf("g: %i\n" , g);
 
-    if(w == 1)
+    if (w == 1)
     manual();
 
-    if(g == 1)
+    if (g == 1)
     automatico();
    };
    wb_robot_cleanup();
