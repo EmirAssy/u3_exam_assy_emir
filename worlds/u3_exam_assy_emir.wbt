@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9910575112155072 0.10927946411151532 0.07657028266125745 5.372566092900155
-  position 0.8763960710312113 5.38452905267503 3.5629722718628125
+  orientation 0.9968721115396537 -0.0764486599219142 -0.020039851062707635 5.2752261597099865
+  position 1.6112866281580756 5.273588200840439 4.600277146187368
 }
 TexturedBackground {
 }
@@ -748,61 +748,43 @@ DEF OMNI_WHEELS Robot {
   controller "u3_exam_assy_emir"
 }
 Solid {
-  translation 1.3735121663098588 0.5 0.5207704147309817
-  rotation 0 1 0 6.021385901
+  translation 1.8600000000000005 0.5 0.5200000000000001
   children [
-    DEF S_SBOX Shape {
+    Shape {
       appearance PBRAppearance {
-        baseColor 0.8 0 0
       }
-      geometry Box {
+      geometry DEF S_BOX Box {
         size 1 1 1
       }
     }
   ]
-  boundingObject Box {
-    size 1 1 1
-  }
-  physics Physics {
-  }
+  boundingObject USE S_BOX
 }
 Solid {
-  translation 0.24053209660704053 0.5 -2.7851116402818983
-  rotation 0 1 0 6.021385901
+  translation -0.009999999999999525 0.5 -2.0300000000000002
   children [
-    DEF S_SBOX Shape {
+    Shape {
       appearance PBRAppearance {
-        baseColor 0.8 0 0
       }
-      geometry Box {
+      geometry DEF S_BOX Box {
         size 1 1 1
       }
     }
   ]
   name "solid(1)"
-  boundingObject Box {
-    size 1 1 1
-  }
-  physics Physics {
-  }
+  boundingObject USE S_BOX
 }
 Solid {
-  translation -1.1470599314691505 0.5 2.122992715130623
-  rotation 0 1 0 6.021385901
+  translation -0.4199999999999997 0.5 2.2300000000000004
   children [
-    DEF S_SBOX Shape {
+    Shape {
       appearance PBRAppearance {
-        baseColor 0.8 0 0
       }
-      geometry Box {
+      geometry DEF S_BOX Box {
         size 1 1 1
       }
     }
   ]
   name "solid(2)"
-  boundingObject Box {
-    size 1 1 1
-  }
-  physics Physics {
-  }
+  boundingObject USE S_BOX
 }

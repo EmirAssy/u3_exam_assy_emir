@@ -18,15 +18,15 @@ int main(int argc, char **argv)
 
   int pressed_key;
 
-   int w = 0, g = 0;
-   int turn_left = 0;
-   int turn_right = 0;
-   double ds_value1 = 0;
-   double ds_value2 = 0;
-   double Comparador = 0;
-   double encoderval1 = 0;
-   double encoderval2 = 0;
-   double encoderval3 = 0;
+  int w = 0, g = 1;
+  int turn_left = 0;
+  int turn_right = 0;
+  double ds_value1 = 0;
+  double ds_value2 = 0;
+  double Comparador = 0;
+  double encoderval1 = 0;
+  double encoderval2 = 0;
+  double encoderval3 = 0;
 
    // Motor devices
    WbDeviceTag wheelR = wb_robot_get_device("wheel1");
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
    wb_distance_sensor_enable(dist_sensor1, TIME_STEP);
    WbDeviceTag dist_sensor2 = wb_robot_get_device("distance_sensor2");
    wb_distance_sensor_enable(dist_sensor2, TIME_STEP);
-   
+
    //encoder devices
    WbDeviceTag encoder_1 = wb_robot_get_device("encoder1");
    wb_position_sensor_enable(encoder_1, TIME_STEP);
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
    WbDeviceTag encoder_3 = wb_robot_get_device("encoder3");
    wb_position_sensor_enable(encoder_3, TIME_STEP);
 
-  void manual(){
+   void manual(){
 
      pressed_key= wb_keyboard_get_key();
 
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
      printf("Distance sensor1: %lf\n", ds_value1);
      ds_value2 = wb_distance_sensor_get_value (dist_sensor2);
      printf("Distance sensor2: %lf\n", ds_value2);
-   
+
      encoderval1 = wb_position_sensor_get_value(encoder_1);
      printf("encoder_1: %lf\n", encoderval1);
      encoderval2 = wb_position_sensor_get_value(encoder_2);
@@ -66,13 +66,13 @@ int main(int argc, char **argv)
      encoderval3 = wb_position_sensor_get_value(encoder_3);
      printf("encoder_3: %lf\n", encoderval3);
 
-     printf("Comparador: %lf\n",Comparador ); 
+     printf("Comparador: %lf\n",Comparador );
 
      if (pressed_key == WB_KEYBOARD_UP){
        wb_motor_set_velocity (wheelR, -6.36);
        wb_motor_set_velocity (wheelL, 6.36);
        wb_motor_set_velocity (wheelB, 0);
-     } 
+     }
      else if (pressed_key == WB_KEYBOARD_DOWN){
        wb_motor_set_velocity (wheelR, 6.36);
        wb_motor_set_velocity (wheelL, -6.36);
@@ -97,8 +97,8 @@ int main(int argc, char **argv)
        wb_motor_set_velocity(wheelR, 6.36);
        wb_motor_set_velocity(wheelL, 6.36);
        wb_motor_set_velocity(wheelB, 6.36);
-      }
-      else{
+     }
+     else{
        wb_motor_set_velocity(wheelR, 0);
        wb_motor_set_velocity(wheelL, 0);
        wb_motor_set_velocity(wheelB, 0);
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
         wb_motor_set_velocity(wheelL, 0);
         wb_motor_set_velocity(wheelB, 0);
      }
-    } 
+   }
 
    void automatico(){
 
@@ -175,11 +175,11 @@ int main(int argc, char **argv)
     printf("w: %i\n" , w);
     printf("g: %i\n" , g);
 
-   if(w == 1)
-   manual();
+    if(w == 1)
+    manual();
 
-   if(g == 1)
-   automatico();
+    if(g == 1)
+    automatico();
    };
    wb_robot_cleanup();
    return 0;
